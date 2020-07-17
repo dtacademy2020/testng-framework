@@ -13,7 +13,7 @@ public class LoginPage {
 	
 	public LoginPage() {
 		
-	PageFactory.initElements(Driver.getDriver(), this); // This statement is initializing the variables that are tagged
+		PageFactory.initElements(Driver.getDriver(), this); // This statement is initializing the variables that are tagged
 															//with @FindBy annotations
 		
 	}

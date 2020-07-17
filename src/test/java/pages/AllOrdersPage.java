@@ -25,5 +25,22 @@ public class AllOrdersPage {
 	
 	
 	
+	@FindBy (id = "ctl00_MainContent_btnCheckAll")
+	public WebElement checkAllButton;
+	
+	@FindBy (className = "btnDeleteSelected")
+	public WebElement deleteButton;
+	
+	@FindBy (id = "ctl00_MainContent_orderMessage")
+	public WebElement message;
+	
+	@FindBy (xpath = "//a[.='View all products']")
+	public WebElement productPageLink;
+	
+	
+	
+	
+	
+	
 
 }
