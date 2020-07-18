@@ -174,6 +174,16 @@ public class BrowserUtilities {
         File finalDestination = new File(path);
         FileUtils.copyFile(source, finalDestination);
     }
+    public static String getFullScreenshot(String fileName) throws IOException {
+        Screenshot fpScreenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000))
+                .takeScreenshot(Driver.getDriver());
+        String date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+        String path = System.getProperty("user.dir") + "/test-output/Screenshots/" + fileName + date
+                + ".png";
+        ImageIO.write(fpScreenshot.getImage(), "PNG", new File(path));
+        return path;
+    }
+    
     public static void takeFullScreenshot(String fileName) throws IOException {
         Screenshot fpScreenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000))
                 .takeScreenshot(Driver.getDriver());
@@ -181,6 +191,7 @@ public class BrowserUtilities {
         String path = System.getProperty("user.dir") + "/test-output/Screenshots/" + fileName + date
                 + ".png";
         ImageIO.write(fpScreenshot.getImage(), "PNG", new File(path));
+        
     }
 
 

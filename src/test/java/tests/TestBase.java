@@ -1,9 +1,11 @@
 package tests;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
@@ -14,23 +16,25 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
+import utilities.BrowserUtilities;
 import utilities.ConfigReader;
 import utilities.Driver;
 
-public abstract class TestBase {
+public abstract class TestBase { // Abstraction example in my framework
 	
-	String st;
+	
 	
 protected WebDriver driver;
 protected Actions actions;
 
-protected static ExtentReports reporter;
-protected static ExtentSparkReporter htmlReporter;
-protected static ExtentTest logger;
+protected static ExtentReports reporter; // Manages the whole reporting process
+protected static ExtentSparkReporter htmlReporter; // Responsible for generating the HTML
+protected static ExtentTest logger; // Responsible for logs -> diagnostic messages about the various stages of the test case
 
-	@BeforeSuite
+	@BeforeSuite (alwaysRun = true)
 	public void setUpSuite() {
 		reporter = new ExtentReports();
+		
 		String path = System.getProperty("user.dir")+"/test-output/ExtentReports/report.html";
 		
 		htmlReporter = new ExtentSparkReporter(path);
@@ -62,12 +66,27 @@ protected static ExtentTest logger;
 	}
 	
 	@AfterMethod (alwaysRun = true)
-	public void tearDownMethod() {
+	public void tearDownMethod(ITestResult testResult) throws IOException {
+		
+		if (logger != null) {
+			if (testResult.getStatus() == ITestResult.SUCCESS) {
+
+				logger.pass("PASSED, test case: " + testResult.getName());
+			} else if (testResult.getStatus() == ITestResult.SKIP) {
+				logger.skip("SKIPPED, test case: " + testResult.getName());
+				logger.skip(testResult.getThrowable());
+			} else if (testResult.getStatus() == ITestResult.FAILURE) {
+				logger.fail("FAILED, test result: " + testResult.getName());
+				logger.fail(testResult.getThrowable());
+			//	String path = BrowserUtilities.getFullScreenshot(testResult.getName()); //takes the screenshot of entire page
+			//	logger.addScreenCaptureFromPath(path); // Attaches the screenshot image to the report
+			} 
+		}
 		Driver.quit();
 	}
 	
 	
-	@AfterSuite
+	@AfterSuite (alwaysRun = true)
 	
 	public void tearDownSuite() {
 		reporter.flush();

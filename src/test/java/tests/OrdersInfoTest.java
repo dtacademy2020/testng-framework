@@ -10,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
+
 import pages.AllOrdersPage;
 import pages.LoginPage;
 import utilities.BrowserUtilities;
@@ -19,38 +21,36 @@ public class OrdersInfoTest extends TestBase{
 	AllOrdersPage ap;
 	
 	
-	@BeforeMethod
+	@BeforeMethod (alwaysRun = true)
 	public void setupOrdersPage() {
 		new LoginPage().login(); 
 	}
 	
-	@Test
+	@Test (groups ="smoke")
 	public void verifyLinks() {
-		
-		// Use only when you a single instance of that class
+		logger = reporter.createTest("Verify 3 links");
+
 		
 		ap = new AllOrdersPage();
 		
 		List<String> expectedList = Arrays.asList("View all orders", "View all products", "Order");
 		
-//		List<WebElement> webelements = ap.list;
 //		
-//		List<String> actualList = new ArrayList<String>();
-//		
-//		for (WebElement webElement : webelements) {
-//			actualList.add(webElement.getText());
-//		}
-		
+		logger.log(Status.INFO, "Retrieving text of the links");
+
 		List<String> actualList = BrowserUtilities.getElementsText(ap.list);
 		
-		
+		logger.info("Verifying that 2 lists are equal");
+
 		assertEquals(actualList, expectedList);
+		
+		
 		
 	}
 	
 	@Test
 	public void verifyDeleteAllButton() {
-		reporter.createTest("Verify delete all button");
+		logger = reporter.createTest("Verify delete all button");
 		
 		ap = new AllOrdersPage();
 		
@@ -64,7 +64,7 @@ public class OrdersInfoTest extends TestBase{
 		String actual = ap.message.getText();
 		logger.info("Verifying the the expected message");
 		assertEquals(actual+"cavnsba", expected);
-    	logger.pass("Verified the the expected message");
+    	
 		
 	}
 

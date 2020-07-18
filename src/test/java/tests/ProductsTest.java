@@ -15,14 +15,19 @@ import pages.ProductsPage;
 
 public class ProductsTest extends TestBase{
 	
-	@Test
+	@Test (groups ="smoke")
 	public void verifyProductNames() {
-		
+	logger = reporter.createTest("Verify product names");
+
 	LoginPage lp = new LoginPage();
-		
+	
+	logger.info("Logging in");
+	
 	lp.login();
 	
 	AllOrdersPage ap = new AllOrdersPage();
+	logger.info("Clicking on products link");
+
 	
 	ap.productPageLink.click();
 	
@@ -35,7 +40,8 @@ public class ProductsTest extends TestBase{
 		actual.add(el.getText());
 		
 	}
-	
+	logger.info("Verifying the product names");
+
 	assertEquals(actual, expected);
 	
 	

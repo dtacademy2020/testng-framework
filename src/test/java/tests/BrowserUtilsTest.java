@@ -1,5 +1,7 @@
 package tests;
 
+import static org.testng.Assert.assertTrue;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,27 +22,41 @@ public class BrowserUtilsTest {
 	
 	@Test
 	public void test1() {
-		System.out.println(System.getProperty("user.dir"));
-//		Driver.getDriver().get("https://www.duotech.io/");
-//		Driver.getDriver().findElement(By.id("comp-k043kr8ilabel")).click();
-//		
-//		BrowserUtilities.switchToWindow("AWS Certified Solutions Architect – Associate Certification");
-//		
-//		System.out.println(Driver.getDriver().getTitle());
 		
-//		 TakesScreenshot ts = (TakesScreenshot) Driver.getDriver(); //create the object of TakesScreenshot interface
-//	     
-//		 File source = ts.getScreenshotAs(OutputType.FILE);
-//		 
-//		 String date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-	     
-		// String path = System.getProperty("user.dir") + "/test-output/Screenshots/" + fileName + date + ".png";
-	     
-	//     File finalDestination = new File(path);
-	     
-	  //   FileUtils.copyFile(source, finalDestination);
+		Driver.getDriver().get("https://www.lexus.com/");
 		
+		assertTrue(false);
+//		
 		
 	}
-
+	
+	
+	@Test
+	public void fileUploadTest() {
+		
+		Driver.getDriver().get("http://tinyupload.com/");
+		Driver.getDriver().findElement(By.xpath("//input[@name='uploaded_file']")).
+		sendKeys("C:\\Users\\Duotech\\git\\FrameworkNew\\pom.xml");
+		
+		Driver.getDriver().findElement(By.xpath("//img[@alt='Upload']")).click();
+		
+//		
+		
+	}
+	
+	
+	@Test
+	public void fileDownloadTest() {
+		
+	//	logger = reporter.createTest("Testing entire page screenshot");
+		Driver.getDriver().get("https://www.pexels.com/");
+		Driver.getDriver().findElement(By.xpath("//a[@data-photo-id='1494280']")).
+		click();
+		
+		
+		
+//		
+		
+	}
+	
 }
