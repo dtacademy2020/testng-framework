@@ -5,17 +5,22 @@
 	<groupId>com.secure</groupId>
 	<artifactId>online-store</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	
+
 	<properties>
-	   <maven.compiler.source>1.8</maven.compiler.source>
-	   <maven.compiler.target>1.8</maven.compiler.target>
-		
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+
 	</properties>
-	
-	
+
+
 
 
 	<dependencies>
+
+
+
+
+
 
 
 		<dependency>
@@ -23,6 +28,14 @@
 			<artifactId>selenium-java</artifactId>
 			<version>3.141.59</version>
 		</dependency>
+
+
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-remote-driver</artifactId>
+			<version>3.141.59</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.testng</groupId>
@@ -38,6 +51,22 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>ru.yandex.qatools.ashot</groupId>
+			<artifactId>ashot</artifactId>
+			<version>1.5.4</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.aventstack</groupId>
+			<artifactId>extentreports</artifactId>
+			<version>4.1.7</version>
+		</dependency>
+
+
+
+
 
 
 
@@ -47,8 +76,8 @@
 
 
 	</dependencies>
-	
-	
+
+
 	<build>
 		<pluginManagement>
 			<plugins>

@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 
 import pages.AllOrdersPage;
 import pages.LoginPage;
+import utilities.BrowserUtilities;
 
 public class OrdersInfoTest extends TestBase{
 	
@@ -32,13 +33,15 @@ public class OrdersInfoTest extends TestBase{
 		
 		List<String> expectedList = Arrays.asList("View all orders", "View all products", "Order");
 		
-		List<WebElement> webelements = ap.list;
+//		List<WebElement> webelements = ap.list;
+//		
+//		List<String> actualList = new ArrayList<String>();
+//		
+//		for (WebElement webElement : webelements) {
+//			actualList.add(webElement.getText());
+//		}
 		
-		List<String> actualList = new ArrayList<String>();
-		
-		for (WebElement webElement : webelements) {
-			actualList.add(webElement.getText());
-		}
+		List<String> actualList = BrowserUtilities.getElementsText(ap.list);
 		
 		
 		assertEquals(actualList, expectedList);
@@ -47,15 +50,21 @@ public class OrdersInfoTest extends TestBase{
 	
 	@Test
 	public void verifyDeleteAllButton() {
+		reporter.createTest("Verify delete all button");
 		
 		ap = new AllOrdersPage();
 		
+		
+		
+		logger.info("Clicking on check all button");
 		ap.checkAllButton.click();
+		logger.info("Clicking on delete button");
 		ap.deleteButton.click();
 		String expected = "List of orders is empty. In order to add new order use this link.";
 		String actual = ap.message.getText();
-		
-		assertEquals(actual, expected);
+		logger.info("Verifying the the expected message");
+		assertEquals(actual+"cavnsba", expected);
+    	logger.pass("Verified the the expected message");
 		
 	}
 

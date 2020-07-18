@@ -2,11 +2,14 @@ package tests;
 
 import static org.testng.Assert.assertEquals;
 
+import java.io.IOException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
 
 import pages.LoginPage;
+import utilities.BrowserUtilities;
 import utilities.ConfigReader;
 
 
@@ -23,14 +26,18 @@ public class LoginTest extends TestBase {
 	
 	
 	@Test
-	public void positiveLoginUsingPOM() {
+	public void positiveLoginUsingPOM() throws IOException {
 		LoginPage loginPage = new LoginPage();
 		
 		loginPage.usernameField.sendKeys(ConfigReader.getProperty("username"));
 		loginPage.passwordField.sendKeys(ConfigReader.getProperty("password"));
 		loginPage.loginButton.click();
 		
-		assertEquals(loginPage.title, "Web Orders");
+		try {
+		assertEquals(loginPage.title, "Web Orderz");
+		}catch(AssertionError a) {
+		BrowserUtilities.takeScreenshot("Screenshot");
+		}
 		
 	}
 	
