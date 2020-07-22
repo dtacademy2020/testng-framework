@@ -10,6 +10,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -53,9 +55,10 @@ protected static ExtentTest logger; // Responsible for logs -> diagnostic messag
 
 	
 	@BeforeMethod (alwaysRun = true)
-	public void setUpMethod() {
+	@Parameters ("browser")
+	public void setUpMethod(@Optional String browser) {
 		
-		driver = Driver.getDriver();
+		driver = Driver.getDriver(browser);
 		actions = new Actions(driver);
 		driver.manage().timeouts().implicitlyWait(
 				Long.parseLong(ConfigReader.getProperty("implicitWait")), TimeUnit.SECONDS);
@@ -78,8 +81,8 @@ protected static ExtentTest logger; // Responsible for logs -> diagnostic messag
 			} else if (testResult.getStatus() == ITestResult.FAILURE) {
 				logger.fail("FAILED, test result: " + testResult.getName());
 				logger.fail(testResult.getThrowable());
-			//	String path = BrowserUtilities.getFullScreenshot(testResult.getName()); //takes the screenshot of entire page
-			//	logger.addScreenCaptureFromPath(path); // Attaches the screenshot image to the report
+				String path = BrowserUtilities.getFullScreenshot(testResult.getName()); //takes the screenshot of entire page
+				logger.addScreenCaptureFromPath(path); // Attaches the screenshot image to the report
 			} 
 		}
 		Driver.quit();
