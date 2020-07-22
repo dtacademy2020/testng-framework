@@ -59,11 +59,18 @@ public class LoginTest extends TestBase {
 		logger = reporter.createTest("Positive login using POM with methods ") ;
 		
 		LoginPage loginPage = new LoginPage();
+		
 		logger.info("Logging in");
+		
 		loginPage.login();
+		
 		logger.info("verifying the title");
 
 		assertEquals(loginPage.title, "Web Orders Login");
+		
+		//Given the user is at Login page
+		//When user enters username and password
+		//Then user should be able to login
 		
 	}
 

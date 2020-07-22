@@ -8,15 +8,11 @@ import org.openqa.selenium.support.PageFactory;
 
 import utilities.Driver;
 
-public class AllOrdersPage {
+public class AllOrdersPage extends BasePage {
 	
 	
-	public AllOrdersPage() {
-		
-		PageFactory.initElements(Driver.getDriver(), this); // This statement is initializing the variables that are tagged
-																//with @FindBy annotations
-			
-		}
+	
+	
 	
 	
 	
@@ -34,8 +30,7 @@ public class AllOrdersPage {
 	@FindBy (id = "ctl00_MainContent_orderMessage")
 	public WebElement message;
 	
-	@FindBy (xpath = "//a[.='View all products']")
-	public WebElement productPageLink;
+	
 	
 	
 	

@@ -8,15 +8,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import utilities.Driver;
 
-public class ProductsPage {
+public class ProductsPage extends BasePage{
 
-	public ProductsPage() {
-
-		PageFactory.initElements(Driver.getDriver(), this); // This statement is initializing the variables that are
-															// tagged
-															// with @FindBy annotations
-
-	}
+	
 	
 	@FindBy (xpath = "//table[@class='ProductsTable']//tr//td[1]")
 	public List<WebElement> list;

@@ -63,7 +63,7 @@ public class OrdersInfoTest extends TestBase{
 		String expected = "List of orders is empty. In order to add new order use this link.";
 		String actual = ap.message.getText();
 		logger.info("Verifying the the expected message");
-		assertEquals(actual+"cavnsba", expected);
+		assertEquals(actual, expected);
     	
 		
 	}
