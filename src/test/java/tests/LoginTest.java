@@ -47,7 +47,7 @@ public class LoginTest extends TestBase {
 		
 		logger.info("verifying the title");
 
-		assertEquals(loginPage.title, "Web Orderz");
+		assertEquals(driver.getTitle(), "Web Orderz");
 		
 		
 		
@@ -66,8 +66,10 @@ public class LoginTest extends TestBase {
 		
 		logger.info("verifying the title");
 
-		assertEquals(loginPage.title, "Web Orders Login");
+		assertEquals(driver.getTitle(), "WeV Orders");
 		
+		
+		//BDD STYLE TEST CASE
 		//Given the user is at Login page
 		//When user enters username and password
 		//Then user should be able to login
